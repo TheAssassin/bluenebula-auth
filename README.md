@@ -15,3 +15,16 @@ There are two authentication workflows:
 This project focuses around the client auth workflow currently.
 
 ![](docs/auth-workflow-client.png)
+
+
+## Usage
+
+```text
+> ./bluenebula-auth help
+Usage: ./bluenebula-auth <command> [args...]
+  help                - show this help text and exit
+  reqauth <pubkey>    - generate challenge for given pubkey
+  confauth <response> - validate client reply
+  genkey              - generate key pair
+  pubkey <privkey>    - generate (derive) public from private key
+```

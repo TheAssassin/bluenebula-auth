@@ -1,0 +1,32 @@
+@startuml
+
+autonumber
+
+participant client #lime
+participant server #lightblue
+participant master #orange
+
+
+client -> server: N_TRYAUTH
+
+server -> master: reqauth
+
+master -> master: checks\nuser db
+
+server <-[#red]- master: failauth (if no user found)
+server <[#green]- master: chalauth (if user found)
+
+client <- server: N_AUTHCHAL
+
+client -> client: calculate\nanswer\nchallenge
+
+client -> server: N_AUTHANS
+
+server -> master: confauth %u %s
+
+master -> master: checkchallenge
+
+master -[#red]-> server: failauth (if check fails)
+server <[#green]- master: succauth %s %s %s
+
+@enduml

@@ -9,7 +9,7 @@
 namespace bncrypto = bluenebula::crypto;
 
 void reqauth(char* pubkey) {
-    std::cout << bncrypto::make_auth_request(pubkey) << std::endl;
+    std::cout << bncrypto::generate_auth_challenge(pubkey) << std::endl;
 }
 
 void confauth(char* arg) {

@@ -3,7 +3,7 @@
 namespace bluenebula {
     namespace crypto {
 
-        std::string make_auth_request(const std::string& pubkey) {
+        std::string generate_auth_challenge(const std::string& pubkey) {
             auto* parsed_pubkey = lowlevel::parsepubkey(pubkey.c_str());
 
             std::vector<char> challengestr;

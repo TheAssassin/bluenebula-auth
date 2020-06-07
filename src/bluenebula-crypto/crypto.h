@@ -37,7 +37,7 @@ namespace bluenebula {
             }
         }
 
-        std::string make_auth_request(const std::string& pubkey);
+        std::string generate_auth_challenge(const std::string& pubkey);
 
         std::pair<std::string, std::string> generate_key_pair();
 

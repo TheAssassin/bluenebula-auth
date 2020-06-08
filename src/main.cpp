@@ -8,11 +8,11 @@
 
 namespace bncrypto = bluenebula::crypto;
 
-void reqauth(char* pubkey) {
+void reqauth(const char* pubkey) {
     std::cout << bncrypto::generate_auth_challenge(pubkey) << std::endl;
 }
 
-void confauth(char* arg) {
+void confauth(const char* arg) {
     (void) arg;
     std::cerr << "TODO" << std::endl;
 }
@@ -24,15 +24,15 @@ void genkey() {
     std::cout << "pubkey : " << key_pair.second.data() << std::endl;
 }
 
-void pubkey(char* privkey) {
+void pubkey(const char* privkey) {
     std::cout << "pubkey: " << bncrypto::generate_pubkey(privkey)  << std::endl;
 }
 
-void show_usage(char** argv) {
+void show_usage(char* const* argv) {
     std::cout << "Usage: " << argv[0] << " <command> [args...]" << std::endl;
 }
 
-void show_help(char** argv) {
+void show_help(char* const* argv) {
     show_usage(argv);
     std::cout << "  help                - show this help text and exit" << std::endl
               << "  reqauth <pubkey>    - generate challenge for given pubkey" << std::endl

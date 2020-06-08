@@ -39,5 +39,10 @@ namespace bluenebula {
             return pubkey.data();
         }
 
+        bool check_auth_reply(const std::string& reply, const std::string& challenge) {
+            std::vector<char> challenge_buf(challenge.begin(), challenge.end());
+            return lowlevel::checkchallenge(reply.c_str(), reinterpret_cast<void*>(challenge_buf.data()));
+        }
+
     }
 }

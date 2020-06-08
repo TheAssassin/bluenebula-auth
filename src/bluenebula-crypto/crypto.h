@@ -42,5 +42,7 @@ namespace bluenebula {
         std::pair<std::string, std::string> generate_key_pair();
 
         std::string generate_pubkey(const std::string& privkey);
+
+        bool check_auth_reply(const std::string& reply, const std::string& challenge);
     }
 }

@@ -15,18 +15,18 @@ void reqauth(char* pubkey) {
 void confauth(char* arg) {
     (void) arg;
     std::cerr << "TODO" << std::endl;
-};
+}
 
 void genkey() {
     const auto key_pair = bncrypto::generate_key_pair();
 
     std::cout << "privkey: " << key_pair.first.data() << std::endl;
     std::cout << "pubkey : " << key_pair.second.data() << std::endl;
-};
+}
 
 void pubkey(char* privkey) {
     std::cout << "pubkey: " << bncrypto::generate_pubkey(privkey)  << std::endl;
-};
+}
 
 void show_usage(char** argv) {
     std::cout << "Usage: " << argv[0] << " <command> [args...]" << std::endl;

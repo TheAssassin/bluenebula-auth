@@ -9,12 +9,9 @@
 namespace bncrypto = bluenebula::crypto;
 
 void reqauth(const char* pubkey) {
-    std::cout << bncrypto::generate_auth_challenge(pubkey) << std::endl;
-}
-
-void confauth(const char* arg) {
-    (void) arg;
-    std::cerr << "TODO" << std::endl;
+    auto rv = bncrypto::generate_auth_challenge(pubkey);
+    std::cout << "challenge:       " << rv.first << std::endl
+              << "expected answer: " << rv.second << std::endl;
 }
 
 void genkey() {
@@ -34,11 +31,10 @@ void show_usage(char* const* argv) {
 
 void show_help(char* const* argv) {
     show_usage(argv);
-    std::cout << "  help                - show this help text and exit" << std::endl
-              << "  reqauth <pubkey>    - generate challenge for given pubkey" << std::endl
-              << "  confauth <response> - validate client reply" << std::endl
-              << "  genkey              - generate key pair" << std::endl
-              << "  pubkey <privkey>    - generate (derive) public from private key" << std::endl;
+    std::cout << "  help             - show this help text and exit" << std::endl
+              << "  reqauth <pubkey> - generate challenge for given pubkey" << std::endl
+              << "  genkey           - generate key pair" << std::endl
+              << "  pubkey <privkey> - generate (derive) public from private key" << std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -54,9 +50,6 @@ int main(int argc, char** argv) {
         return 0;
     } else if (argc >= 3 && command == "reqauth") {
         reqauth(argv[2]);
-        return 0;
-    } else if (argc >= 3 && command == "confauth") {
-        confauth(argv[2]);
         return 0;
     } else if (argc >= 3 && command == "pubkey") {
         pubkey(argv[2]);

@@ -64,10 +64,11 @@ class CMakeBuild(build_ext):
 
 
 this_dir = os.path.abspath(os.path.dirname(__file__))
+git_commit = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=this_dir).decode().strip("\n")
 
 setup(
     name="bn_crypto",
-    version="0.0.1-alpha-" + subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=this_dir).decode(),
+    version="0.0.1-alpha-" + git_commit,
     ext_modules=[CMakeExtension("bn_crypto", this_dir)],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,

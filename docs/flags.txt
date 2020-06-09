@@ -1,0 +1,9 @@
+flag  privilege name
+----  --------------
+c     creator (founder)
+d     developer
+a     global admin
+o     global operator
+m     global moderator
+s     global supporter
+u     registered player

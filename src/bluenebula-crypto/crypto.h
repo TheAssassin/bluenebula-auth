@@ -20,6 +20,8 @@ namespace bluenebula {
 
             void freepubkey(void* pubkey);
 
+            void answerchallenge(const char* privstr, const char* challenge, std::vector<char>& answerstr);
+
             template<typename T>
             std::vector<T> make_seed(const size_t len) {
                 static_assert(std::is_integral<T>::value, "integral type required");
@@ -43,5 +45,7 @@ namespace bluenebula {
         std::pair<std::string, std::string> generate_key_pair();
 
         std::string generate_pubkey(const std::string& privkey);
+
+        std::string answer_challenge(const std::string& privkey, const std::string& challenge);
     }
 }

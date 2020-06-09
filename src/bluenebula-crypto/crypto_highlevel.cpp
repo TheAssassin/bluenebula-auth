@@ -46,5 +46,11 @@ namespace bluenebula {
             return pubkey.data();
         }
 
+        std::string answer_challenge(const std::string& privkey, const std::string& challenge) {
+            std::vector<char> answer;
+            lowlevel::answerchallenge(privkey.c_str(), challenge.c_str(), answer);
+            return answer.data();
+        }
+
     }
 }

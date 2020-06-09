@@ -25,16 +25,21 @@ void pubkey(const char* privkey) {
     std::cout << "pubkey: " << bncrypto::generate_pubkey(privkey)  << std::endl;
 }
 
+void answer(const char* privkey, const char* challenge) {
+    std::cout << "answer: " << bncrypto::answer_challenge(privkey, challenge)  << std::endl;
+}
+
 void show_usage(char* const* argv) {
     std::cout << "Usage: " << argv[0] << " <command> [args...]" << std::endl;
 }
 
 void show_help(char* const* argv) {
     show_usage(argv);
-    std::cout << "  help             - show this help text and exit" << std::endl
-              << "  reqauth <pubkey> - generate challenge for given pubkey" << std::endl
-              << "  genkey           - generate key pair" << std::endl
-              << "  pubkey <privkey> - generate (derive) public from private key" << std::endl;
+    std::cout << "  help                         - show this help text and exit" << std::endl
+              << "  reqauth <pubkey>             - generate challenge for given pubkey" << std::endl
+              << "  answer <privkey> <challenge> - generate answer for challenge using privkey" << std::endl
+              << "  genkey                       - generate key pair" << std::endl
+              << "  pubkey <privkey>             - generate (derive) public from private key" << std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -53,6 +58,9 @@ int main(int argc, char** argv) {
         return 0;
     } else if (argc >= 3 && command == "pubkey") {
         pubkey(argv[2]);
+        return 0;
+    } else if (argc >= 4 && command == "answer") {
+        answer(argv[2], argv[3]);
         return 0;
     } else if (command == "genkey") {
         genkey();

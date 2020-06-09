@@ -37,8 +37,7 @@ namespace bluenebula {
 
             lowlevel::genprivkey(seed.data(), privkey, pubkey);
 
-            std::pair<std::string, std::string> rv{privkey.data(), pubkey.data()};
-            return rv;
+            return std::make_pair(privkey.data(), pubkey.data());
         }
 
         std::string generate_pubkey(const std::string& privkey) {

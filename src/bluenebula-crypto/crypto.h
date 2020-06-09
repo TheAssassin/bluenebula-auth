@@ -11,13 +11,14 @@ namespace bluenebula {
         namespace lowlevel {
             void* parsepubkey(const char* pubstr);
 
-            void* genchallenge(void* pubkey, const void* seed, int seedlen, std::vector<char>& challengestr);
+            void genchallenge(void* pubkey, const void* seed, int seedlen, std::vector<char>& challengestr,
+                              std::vector<char>& answerstr);
 
             void genprivkey(const char* seed, std::vector<char>& privstr, std::vector<char>& pubstr);
 
             void genpubkey(const char* privstr, std::vector<char>& pubstr);
 
-            bool checkchallenge(const char* answerstr, void* correct);
+            void freepubkey(void* pubkey);
 
             template<typename T>
             std::vector<T> make_seed(const size_t len) {
@@ -37,12 +38,10 @@ namespace bluenebula {
             }
         }
 
-        std::string generate_auth_challenge(const std::string& pubkey);
+        std::pair<std::string, std::string> generate_auth_challenge(const std::string& pubkey);
 
         std::pair<std::string, std::string> generate_key_pair();
 
         std::string generate_pubkey(const std::string& privkey);
-
-        bool check_auth_reply(const std::string& reply, const std::string& challenge);
     }
 }

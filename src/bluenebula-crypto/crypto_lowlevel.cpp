@@ -964,7 +964,8 @@ b *= mul;
                 delete (ecjacobian*) pubkey;
             }
 
-            void* genchallenge(void* pubkey, const void* seed, int seedlen, std::vector<char>& challengestr) {
+            void genchallenge(void* pubkey, const void* seed, int seedlen, std::vector<char>& challengestr,
+                              std::vector<char>& answerstr) {
                 tiger::hashval hash;
                 tiger::hash((const uchar*) seed, seedlen, hash);
                 gfint challenge;
@@ -983,16 +984,8 @@ b *= mul;
                 secret.print(challengestr);
                 challengestr.emplace_back('\0');
 
-                return new gfield(answer.x);
-            }
-
-            void freechallenge(void* answer) {
-                delete (gfint*) answer;
-            }
-
-            bool checkchallenge(const char* answerstr, void* correct) {
-                gfint answer(answerstr);
-                return answer == *(gfint*) correct;
+                answer.print(answerstr);
+                answerstr.emplace_back('\0');
             }
 
         }

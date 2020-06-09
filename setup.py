@@ -72,4 +72,5 @@ setup(
     ext_modules=[CMakeExtension("bn_crypto", this_dir)],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
+    install_requires=["pybind11"],
 )

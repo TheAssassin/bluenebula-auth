@@ -1,0 +1,13 @@
+language: cpp
+
+script:
+  - bash ci/build.sh
+
+after_success:
+  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+  - bash upload.sh bluenebula-auth
+
+branches:
+  except:
+    - # Do not build tags that we create when we upload to GitHub Releases
+    - /^(?i:continuous.*)$/

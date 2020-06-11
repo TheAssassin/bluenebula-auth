@@ -16,7 +16,10 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_subdirectory(bluenebula-crypto)
 
-add_subdirectory(python)
+set(BUILD_PYTHON_MODULE ON CACHE BOOL "")
+if(BUILD_PYTHON_MODULE)
+    add_subdirectory(python)
+endif()
 
 add_executable(bluenebula-auth main.cpp)
 target_link_libraries(bluenebula-auth PUBLIC bluenebula-crypto)

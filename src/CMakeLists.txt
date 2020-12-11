@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 3.1)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# since we're (likely) building static binaries on the CI, we should add the architecture as a suffix to the binaries' names
+set(CMAKE_EXECUTABLE_SUFFIX -${CMAKE_SYSTEM_PROCESSOR}${CMAKE_EXECUTABLE_SUFFIX})
+
 set(BUILD_PYTHON_MODULE ON CACHE BOOL "")
 
 if(NOT BUILD_PYTHON_MODULE)

@@ -1,39 +1,47 @@
 #! /bin/bash
 
+set -e
+set -x
+
 # use RAM disk if possible
 if [ "$CI" == "" ] && [ -d /dev/shm ]; then
-    TEMP_BASE=/dev/shm
+    temp_base=/dev/shm
 else
-    TEMP_BASE=/tmp
+    temp_base=/tmp
 fi
 
 if [ "$CI" == "" ]; then
     # reserve one core for the rest of the system on dev machines
-    NPROC=$(nproc --ignore=1)
+    nproc=$(nproc --ignore=1)
 else
     # on the CI, we can just use everything we have
-    NPROC=$(nproc)
+    nproc=$(nproc)
 fi
 
-BUILD_DIR=$(mktemp -d -p "$TEMP_BASE" blue-nebula-build-XXXXXX)
+build_dir=$(mktemp -d -p "$temp_base" blue-nebula-build-XXXXXX)
 
 cleanup () {
-    if [ -d "$BUILD_DIR" ]; then
-        rm -rf "$BUILD_DIR"
+    if [ -d "$build_dir" ]; then
+        rm -rf "$build_dir"
     fi
 }
 
 trap cleanup EXIT
 
 # store repo root as variable
-REPO_ROOT="$(readlink -f "$(dirname "$0")")/.."
-OLD_CWD="$(readlink -f .)"
+repo_root="$(readlink -f "$(dirname "$0")")/.."
+old_cwd="$(readlink -f .)"
 
-pushd "$BUILD_DIR"
+pushd "$build_dir"
+
+extra_cmake_args=()
+if [[ "$ARCH" == "i386" ]]; then
+    extra_cmake_args+=("-DCMAKE_TOOLCHAIN_FILE=$repo_root/cmake/toolchains/i386-linux-gnu.cmake")
+fi
 
 # we don't need the Python module
-cmake "$REPO_ROOT" -DCMAKE_BUILD_TYPE=Release -DBUILD_PYTHON_MODULE=Off
+cmake "$repo_root" -DCMAKE_BUILD_TYPE=Release -DBUILD_PYTHON_MODULE=Off "${extra_cmake_args[@]}"
 
 make -j"$(nproc --ignore=1)"
 
-cp bin/bluenebula-auth "$OLD_CWD"
+cp bin/bluenebula-auth-* "$old_cwd"

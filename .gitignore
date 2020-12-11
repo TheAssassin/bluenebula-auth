@@ -2,3 +2,6 @@
 *build*/
 bluenebula-auth
 *.so*
+test/
+*.egg-info
+dist/

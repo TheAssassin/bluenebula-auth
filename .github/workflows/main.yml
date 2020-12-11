@@ -4,7 +4,7 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build-x86_64:
-    name: Build
+    name: Build x86_64
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
           path: bluenebula-auth*
 
   build-i386:
-    name: Build
+    name: Build i386
     runs-on: ubuntu-latest
     env:
       ARCH: i386
@@ -34,7 +34,8 @@ jobs:
   upload:
     name: Create release and upload artifacts
     needs:
-      - build
+      - build-x86_64
+      - build-i386
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts

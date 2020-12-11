@@ -5,3 +5,4 @@ bluenebula-auth
 test/
 *.egg-info
 dist/
+bluenebula-auth-*

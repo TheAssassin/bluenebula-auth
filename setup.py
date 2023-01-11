@@ -68,7 +68,8 @@ git_commit = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cw
 
 setup(
     name="bn_crypto",
-    version="0.0.1-alpha-" + git_commit,
+    # PEP 440
+    version="0.0.1a1+git" + git_commit,
     ext_modules=[CMakeExtension("bn_crypto", this_dir)],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,

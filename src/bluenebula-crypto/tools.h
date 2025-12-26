@@ -7,8 +7,6 @@
 
 namespace bluenebula {
 
-    using std::swap;
-
 #define Z_BEST_COMPRESSION 9
 
 #ifndef _TOOLS_H
@@ -591,9 +589,9 @@ namespace bluenebula {
 
         void move(vector<T>& v) {
             if (!ulen) {
-                swap(buf, v.buf);
-                swap(ulen, v.ulen);
-                swap(alen, v.alen);
+                ::std::swap(buf, v.buf);
+                ::std::swap(ulen, v.ulen);
+                ::std::swap(alen, v.alen);
             } else {
                 growbuf(ulen + v.ulen);
                 if (v.ulen) memcpy(&buf[ulen], (void*) v.buf, v.ulen * sizeof(T));

@@ -174,7 +174,7 @@ b *= mul;
                     if (!*(const uchar*) &islittleendian) {
                         loopk(3) {
                             uchar* c = &val.bytes[k * sizeof(chunk)];
-                            loopl(sizeof(chunk) / 2) swap(c[l], c[sizeof(chunk) - 1 - l]);
+                            loopl(sizeof(chunk) / 2) ::std::swap(c[l], c[sizeof(chunk) - 1 - l]);
                         }
                     }
                 }
@@ -231,12 +231,12 @@ b *= mul;
                 void zero() { len = 0; }
 
                 void print(stream* out) const {
-                    std::vector<char> buf;
+                    ::std::vector<char> buf;
                     printdigits(buf);
                     out->write(buf.data(), buf.size());
                 }
 
-                void printdigits(std::vector<char>& buf) const {
+                void printdigits(::std::vector<char>& buf) const {
                     loopi(len) {
                         digit d = digits[len - i - 1];
                         loopj(BI_DIGIT_BITS / 4) {
@@ -847,7 +847,7 @@ b *= mul;
                     return true;
                 }
 
-                void print(std::vector<char>& buf) {
+                void print(::std::vector<char>& buf) {
                     normalize();
                     buf.emplace_back(y.hasbit(0) ? '-' : '+');
                     x.printdigits(buf);
@@ -903,7 +903,7 @@ b *= mul;
 #error Unsupported GF
 #endif
 
-            void genprivkey(const char* seed, std::vector<char>& privstr, std::vector<char>& pubstr) {
+            void genprivkey(const char* seed, ::std::vector<char>& privstr, ::std::vector<char>& pubstr) {
                 tiger::hashval hash;
                 tiger::hash((const uchar*) seed, (int) strlen(seed), hash);
                 bigint<8 * sizeof(hash.bytes) / BI_DIGIT_BITS> privkey;
@@ -919,7 +919,7 @@ b *= mul;
                 pubstr.emplace_back('\0');
             }
 
-            void genpubkey(const char* privstr, std::vector<char>& pubstr) {
+            void genpubkey(const char* privstr, ::std::vector<char>& pubstr) {
                 gfint privkey;
                 privkey.parse(privstr);
 
@@ -943,7 +943,7 @@ b *= mul;
                 return true;
             }
 
-            void answerchallenge(const char* privstr, const char* challenge, std::vector<char>& answerstr) {
+            void answerchallenge(const char* privstr, const char* challenge, ::std::vector<char>& answerstr) {
                 gfint privkey;
                 privkey.parse(privstr);
                 ecjacobian answer;
@@ -964,8 +964,8 @@ b *= mul;
                 delete (ecjacobian*) pubkey;
             }
 
-            void genchallenge(void* pubkey, const void* seed, int seedlen, std::vector<char>& challengestr,
-                              std::vector<char>& answerstr) {
+            void genchallenge(void* pubkey, const void* seed, int seedlen, ::std::vector<char>& challengestr,
+                              ::std::vector<char>& answerstr) {
                 tiger::hashval hash;
                 tiger::hash((const uchar*) seed, seedlen, hash);
                 gfint challenge;

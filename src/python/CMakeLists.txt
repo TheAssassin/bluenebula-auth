@@ -1,3 +1,9 @@
+cmake_minimum_required(VERSION 3.5)
+
+# compatibility with CMake >= 3.27
+if(POLICY CMP0148)
+    cmake_policy(SET CMP0148 OLD)
+endif()
 find_package(pybind11 CONFIG REQUIRED)
 
 set(module_name bn_crypto)

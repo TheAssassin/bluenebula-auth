@@ -164,7 +164,7 @@ b *= mul;
                     }
 
                     if (j > 56) {
-                        while (j < 64) temp[j++] = 0;
+                        memset(temp, 0, sizeof(temp));
                         compress((chunk*) temp, val.chunks);
                         j = 0;
                     }

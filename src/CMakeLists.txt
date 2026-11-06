@@ -12,6 +12,8 @@ set(BUILD_PYTHON_MODULE ON CACHE BOOL "")
 if(NOT BUILD_PYTHON_MODULE)
     # enable LTO -- not really necessary, but also doesn't hurt
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto -Wall -Werror")
+    # explicitly permit unused-result, BN code base has a lot of these and they should be uncritical
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=unused-result")
 
     # create fully static builds; this should work flawlessly, the code is pretty portable
     # libstdc++ is technically GPL (although they claim they won't punish one if linked statically)

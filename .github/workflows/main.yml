@@ -7,7 +7,7 @@ jobs:
     name: Build x86_64
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build
         run: bash -ex ci/build.sh
       - name: Archive artifacts
@@ -22,7 +22,7 @@ jobs:
     env:
       ARCH: i386
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install dependencies
         run: |
           set -x

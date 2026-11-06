@@ -36,6 +36,21 @@ jobs:
           name: i386
           path: bluenebula-auth*
 
+  build-aarch64:
+    name: Build aarch64
+    runs-on: ubuntu-26.04-arm
+    env:
+      ARCH: aarch64
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build
+        run: bash -ex ci/build.sh
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: aarch64
+          path: bluenebula-auth*
+
   upload:
     name: Create release and upload artifacts
     needs:

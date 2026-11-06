@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 
 # compatibility with CMake >= 3.27
 if(POLICY CMP0148)
